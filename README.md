@@ -1,42 +1,100 @@
-#  SkysCoffee (Spring Boot Demo App)
-## _Spring boot 6 menggunakan spring security_
+# Sky’s Coffee
 
-[![spring boot](https://i.ibb.co.com/f9dxnVj/d-Txp-Pi9l-Df-thumb.png)](https://spring.io)
+**Alur pemesanan kedai kopi, dari menemukan menu hingga mencatat order.**
 
-![Static Badge](https://img.shields.io/badge/build-demo-brightgreen)
+[English](README.en.md) · [Kode sumber](https://github.com/KairunHanjun/SkysCoffee) · [Apache 2.0](LICENSE)
 
-Hanya untuk demo, tidak untuk dijalan sebagai aplikasi jadi. Menggunakan Windows sebagai sarana OS dan tidak menyediakan sarana OS lainnya selain Windows.
+Aplikasi web berbasis Java untuk mengeksplorasi katalog, akun pelanggan, keranjang, dan checkout. Proyek ini menjadi latihan menghubungkan pengalaman pelanggan dengan autentikasi dan pemrosesan data di server. Identitas visual serta aset Sky’s Coffee dipertahankan dari proyek awal.
 
-## Plugins
+## Fitur
 
-Download beberapa kebutuhan untuk running dibawah ini. Link yang diberikan merupakan link download untuk windows, tidak diberikan link download untuk os lain.
+- Penelusuran katalog dan detail produk kopi.
+- Registrasi, login, dan profil pelanggan.
+- Keranjang yang terpisah untuk setiap akun.
+- Pengelolaan jumlah barang dan perhitungan pesanan.
+- Pada demo lokal: checkout simulasi serta profil dan riwayat order.
 
-| Kebutuhan | Download Page |
-| ------ | ------ |
-| Java JDK 21 | [Download Java JDK 21 Disini][PlDb] |
-| Visual Studio Code | [Download Visual Studio Code Disini][PlGh] |
-| Xampp Mysql | [Download Xampp untuk kebutuhan database][PlGd] |
-| Spring Ekstensi | [Download Ekstensi VSCode Spring][PlMe] |
-| Java Ekstensi | [Download Ekstensi VSCode Java][PlOd] |
+## Teknologi
 
-## Running
+| Bagian | Teknologi |
+| --- | --- |
+| Backend | Java 21, Spring Boot 3.3.0 |
+| Antarmuka | Thymeleaf, HTML, CSS, JavaScript |
+| Akun & data | Spring Security, Spring Data JPA, MariaDB pada implementasi awal |
+| Demo lokal | H2 di memori, katalog dan akun fiktif |
+| Build | Gradle Wrapper, JUnit, MockMvc |
 
-1. Buka Visual Studio Code
-2. Download bahan/plugin yang dibutuhkan
-3. Clone Github ini
-4. Jalankan dengan spring eksistensi
-5. lalu buka link dibawah jika running berhasil
+## Menjalankan source repository
+
+Siapkan **JDK 21**, MariaDB, dan konfigurasi layanan yang digunakan implementasi awal. Dependensi integrasi Midtrans, email, dan OAuth tersedia di source; keberhasilan alur produksi tersebut belum diverifikasi.
 
 ```sh
-127.0.0.1:8080
+git clone https://github.com/KairunHanjun/SkysCoffee.git
+cd SkysCoffee
+./gradlew bootRun
 ```
 
-## License
+Pada Windows, gunakan `gradlew.bat`. Konfigurasi lokal dan environment variable perlu disesuaikan sebelum menjalankan. Jangan memasukkan kredensial ke README atau repository.
 
-Apache
+## Demo portofolio lokal
 
-   [PlDb]: <https://download.oracle.com/java/21/archive/jdk-21.0.2_windows-x64_bin.exe>
-   [PlGh]: <https://code.visualstudio.com/download>
-   [PlGd]: <https://sourceforge.net/projects/xampp/files/XAMPP%20Windows/8.2.12/xampp-windows-x64-8.2.12-0-VS16-installer.exe>
-   [PlOd]: <https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack>
-   [PlMe]: <https://marketplace.visualstudio.com/items?itemName=vmware.vscode-boot-dev-pack>
+> Instruksi berikut mengikuti demo di workspace portofolio. Commit README/LICENSE ini tidak menyertakan perubahan implementasi demo yang masih lokal. Gunakan hanya pada checkout yang memiliki `start-demo.ps1` dan profil `application-demo.yml`.
+
+```powershell
+.\start-demo.ps1
+# Port alternatif:
+.\start-demo.ps1 -Port 8082
+```
+
+Dengan source demo yang sesuai, alternatif lintas platform:
+
+```sh
+./gradlew bootRun --args='--spring.profiles.active=demo --server.port=8081'
+```
+
+Buka **http://127.0.0.1:8081**. Hentikan dengan `Ctrl+C`. Launcher memakai JDK 21 portable dari `../.portfolio-tools` bila tersedia; selain itu atur `JAVA_HOME`.
+
+| Username | Kata sandi demo | Kondisi awal |
+| --- | --- | --- |
+| `coffee.demo` | `DemoCoffee123!` | Keranjang Cappuccino dan Iced Vanilla Latte |
+| `guest.demo` | `DemoCoffee123!` | Keranjang kosong |
+
+Demo memakai **H2 di memori**. Akun, perubahan keranjang, dan order kembali ke kondisi awal setelah restart. MariaDB dan layanan cloud tidak diperlukan untuk mode ini.
+
+### Alur yang tersedia pada demo
+
+- Enam produk, pencarian, filter kategori, dan detail kopi.
+- Login BCrypt serta registrasi lokal tanpa email/OTP.
+- Maksimal 20 cup per produk; harga dan total dihitung di server.
+- Biaya kirim contoh Rp10.000 hanya untuk keranjang berisi.
+- Checkout POST dengan CSRF dan penanganan pengiriman ulang.
+- Profil serta riwayat order yang dibatasi berdasarkan pemilik akun.
+
+Semua order berstatus **SIMULATED / NOT PAID**. Demo tidak memproses pembayaran Midtrans, mengirim email, atau mengatur pengiriman barang.
+
+## Build dan pengujian
+
+```sh
+./gradlew test bootJar
+```
+
+Laporan tes berada di `build/reports/tests/test/index.html`; hasil JAR di `build/libs/`. Pada pemeriksaan demo lokal, **19 tes lulus** dan build berhasil. Pemeriksaan tersebut mencakup autentikasi, keranjang, harga server, CSRF, checkout, pemisahan akun, registrasi, dan profil; bukan klaim hasil CI untuk source awal repository.
+
+## Struktur ringkas
+
+```text
+src/main/java/         Controller, service, entity, dan konfigurasi
+src/main/resources/    Template, aset visual, dan konfigurasi
+src/test/              Pengujian aplikasi
+gradle/                Gradle Wrapper
+```
+
+## Batas dan pengembangan berikutnya
+
+Pembayaran nyata, OTP produksi, email, OAuth, dan konfigurasi MariaDB lama belum diverifikasi untuk deployment. Pengembangan berikutnya dapat berfokus pada sandbox pembayaran, notifikasi transaksi, dan penyimpanan persisten. Screenshot lokal berada di workspace terpisah `../portfolio-materials/screenshots/SkysCoffee`, bukan bagian dari clone repository ini.
+
+Proyek awal dikembangkan mandiri oleh **Guntur Ahmad Lion Putranto**. Penyempurnaan demo dan dokumentasi portofolio dibantu Codex.
+
+## Lisensi
+
+Proyek menggunakan **Apache License 2.0** yang sudah tersedia pada [LICENSE](LICENSE). Lisensi asli dipertahankan. Dependensi, gambar, dan font pihak ketiga tetap mengikuti lisensinya masing-masing.
