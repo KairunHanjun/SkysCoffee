@@ -16,6 +16,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 // AUTO GENERATED DO NOT EDIT (EDIT AT YOUR OWN RISK)
 
+@org.springframework.context.annotation.Profile("!demo & !test")
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {

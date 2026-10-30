@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{demo/fragments :: head('Your cart')}" />
+  <body>
+    <div th:replace="~{demo/fragments :: header('cart')}"></div>
+    <main class="container page-content">
+      <div th:replace="~{demo/fragments :: message}"></div>
+      <div class="page-heading heading-row">
+        <div>
+          <p class="eyebrow">A GOOD CHOICE, EVERY TIME</p>
+          <h1>Your coffee break starts here.</h1>
+          <p>Review your favourites and try a demo checkout.</p>
+        </div>
+        <a href="/menu" class="text-link">Keep exploring ↗</a>
+      </div>
+      <div th:if="${cart.lines.isEmpty()}" class="empty-state">
+        <div class="empty-icon">☕</div>
+        <h2>Your next favourite is waiting.</h2>
+        <p>Your cart is empty. Find a coffee that fits your mood.</p>
+        <a class="button dark" href="/menu">Explore the menu ↗</a>
+      </div>
+      <div th:if="${!cart.lines.isEmpty()}" class="checkout-layout">
+        <section class="cart-panel">
+          <div class="panel-heading">
+            <h2>Your selection</h2>
+            <span
+              th:text="${cart.count == 1 ? '1 cup' : cart.count + ' cups'}"
+            ></span>
+          </div>
+          <article class="cart-item" th:each="line : ${cart.lines}">
+            <a th:href="@{/product(product=${line.product.id})}"
+              ><img
+                th:src="${line.product.image}"
+                th:alt="${line.product.name}"
+            /></a>
+            <div class="cart-item-info">
+              <p class="eyebrow" th:text="${line.product.category}"></p>
+              <h3 th:text="${line.product.name}"></h3>
+              <p th:text="${line.product.formattedPrice()} + ' / cup'"></p>
+              <form
+                th:action="@{/cart/quantity}"
+                method="post"
+                class="quantity-form"
+              >
+                <input
+                  type="hidden"
+                  name="product"
+                  th:value="${line.product.id}"
+                /><label
+                  ><span
+                    class="sr-only"
+                    th:text="'Quantity for ' + ${line.product.name}"
+                  ></span
+                  ><input
+                    type="number"
+                    name="quantity"
+                    min="0"
+                    max="20"
+                    step="1"
+                    th:value="${line.quantity}"
+                    required /></label
+                ><button type="submit">Update</button>
+              </form>
+              <form
+                th:action="@{/cart/quantity}"
+                method="post"
+                class="remove-form"
+              >
+                <input
+                  type="hidden"
+                  name="product"
+                  th:value="${line.product.id}"
+                /><input type="hidden" name="quantity" value="0" /><button
+                  class="remove-button"
+                  type="submit"
+                  th:aria-label="'Remove ' + ${line.product.name}"
+                >
+                  Remove
+                </button>
+              </form>
+            </div>
+            <strong
+              class="line-total"
+              th:text="${line.formattedTotal()}"
+            ></strong>
+          </article>
+          <div class="cart-footnote">
+            A small note: this demo uses sample data. No payment is collected
+            and no delivery is made.
+          </div>
+        </section>
+        <aside class="order-summary">
+          <p class="eyebrow">ONE LAST LITTLE STEP</p>
+          <h2>Order summary</h2>
+          <div class="summary-row">
+            <span>Coffee subtotal</span
+            ><strong th:text="${cart.formattedSubtotal()}"></strong>
+          </div>
+          <div class="summary-row">
+            <span>Delivery (sample)</span
+            ><strong th:text="${cart.formattedShipping()}"></strong>
+          </div>
+          <div class="summary-total">
+            <span>Total</span
+            ><strong th:text="${cart.formattedTotal()}"></strong>
+          </div>
+          <form th:action="@{/checkout}" method="post" class="checkout-form">
+            <input
+              type="hidden"
+              name="checkoutToken"
+              th:value="${checkoutToken}"
+            /><label for="recipient">Recipient name</label
+            ><input
+              id="recipient"
+              name="recipient"
+              th:value="${customer.name}"
+              required
+              maxlength="100"
+            /><label for="address">Sample delivery address</label
+            ><textarea
+              id="address"
+              name="address"
+              rows="3"
+              minlength="10"
+              maxlength="300"
+              required
+            >
+Jl. Contoh No. 8, Kota Demo</textarea>
+            <div class="simulation-note">
+              <strong>Simulated checkout</strong>
+              <p>No card details. No payment gateway. No actual transaction.</p>
+            </div>
+            <button type="submit" class="button dark full">
+              Simulate order <span>↗</span>
+            </button>
+          </form>
+        </aside>
+      </div>
+    </main>
+    <footer th:replace="~{demo/fragments :: footer}"></footer>
+  </body>
+</html>

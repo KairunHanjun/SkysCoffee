@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{demo/fragments :: head('A small pause')}" />
+  <body>
+    <div th:replace="~{demo/fragments :: header('')}"></div>
+    <main class="container narrow page-content">
+      <section class="empty-state">
+        <p class="eyebrow" th:text="'REQUEST ' + ${code}"></p>
+        <h1>A small pause in your coffee break.</h1>
+        <p th:text="${error}"></p>
+        <a class="button dark" href="/menu">Back to the menu ↗</a
+        ><a class="text-link" href="/cart">Review your cart</a>
+      </section>
+    </main>
+    <footer th:replace="~{demo/fragments :: footer}"></footer>
+  </body>
+</html>

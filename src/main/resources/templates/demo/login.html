@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{demo/fragments :: head('Sign in')}" />
+  <body>
+    <div th:replace="~{demo/fragments :: header('account')}"></div>
+    <main class="auth-wrap container">
+      <section class="auth-story">
+        <p class="eyebrow light">YOUR NEXT COFFEE MOMENT</p>
+        <h1>A familiar cup.<br />A warm welcome.</h1>
+        <p>
+          Sign in to save your coffee picks<br />and explore the demo checkout.
+        </p>
+      </section>
+      <section class="auth-card">
+        <p class="eyebrow">WELCOME BACK</p>
+        <h2>Good to see you again.</h2>
+        <p class="muted">Sign in to your local demo account.</p>
+        <div th:replace="~{demo/fragments :: message}"></div>
+        <p class="notice error" th:if="${param.error}">
+          The username or password is incorrect.
+        </p>
+        <p class="notice success" th:if="${param.logout}">
+          You have been signed out.
+        </p>
+        <form th:action="@{/auth/login}" method="post">
+          <label for="username">Username</label
+          ><input
+            id="username"
+            name="username"
+            autocomplete="username"
+            required
+            placeholder="Your username"
+          /><label for="password">Password</label
+          ><input
+            id="password"
+            name="password"
+            type="password"
+            autocomplete="current-password"
+            required
+            placeholder="Your password"
+          /><button class="button dark full" type="submit">
+            Sign in <span>↗</span>
+          </button>
+        </form>
+        <details class="demo-credentials" open>
+          <summary>Try the demo account</summary>
+          <p>
+            Username: <code>coffee.demo</code><br />Password:
+            <code>DemoCoffee123!</code>
+          </p>
+          <small>Use sample data only. Everything resets on restart.</small>
+        </details>
+        <div class="auth-links">
+          <a href="/auth/register">Create a demo account</a
+          ><a href="/auth/lupa">Need help?</a>
+        </div>
+      </section>
+    </main>
+    <footer th:replace="~{demo/fragments :: footer}"></footer>
+  </body>
+</html>

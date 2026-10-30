@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{demo/fragments :: head('Our menu')}" />
+  <body>
+    <div th:replace="~{demo/fragments :: header('menu')}"></div>
+    <main class="container page-content">
+      <div th:replace="~{demo/fragments :: message}"></div>
+      <div class="page-heading centered">
+        <p class="eyebrow">SOMETHING GOOD IS BREWING</p>
+        <h1>Find your kind of coffee.</h1>
+        <p>Six favourites. One simple pleasure.</p>
+      </div>
+      <div class="menu-tools">
+        <div class="filters" role="group" aria-label="Filter coffee">
+          <button class="filter active" data-filter="All" aria-pressed="true">
+            All coffees</button
+          ><button class="filter" data-filter="Classics" aria-pressed="false">
+            Classics</button
+          ><button
+            class="filter"
+            data-filter="Milk coffee"
+            aria-pressed="false"
+          >
+            Milk coffee</button
+          ><button
+            class="filter"
+            data-filter="Iced favourites"
+            aria-pressed="false"
+          >
+            Iced favourites
+          </button>
+        </div>
+        <label class="search-label"
+          ><span class="sr-only">Search coffee</span
+          ><input
+            id="coffee-search"
+            type="search"
+            placeholder="Search your coffee..."
+        /></label>
+      </div>
+      <div class="product-grid menu-grid">
+        <div
+          th:each="product : ${products}"
+          class="menu-entry"
+          th:attr="data-category=${product.category},data-name=${product.name}"
+        >
+          <article th:replace="~{demo/fragments :: card(${product})}"></article>
+        </div>
+      </div>
+      <p id="no-coffees" class="empty-state" hidden>
+        No coffees match your search. Try another name or category.
+      </p>
+      <p class="menu-note">
+        All prices are in Indonesian rupiah. Sample catalogue for a local
+        portfolio demo.
+      </p>
+    </main>
+    <footer th:replace="~{demo/fragments :: footer}"></footer>
+  </body>
+</html>

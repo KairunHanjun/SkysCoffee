@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{demo/fragments :: head('Good coffee. Better days.')}" />
+  <body>
+    <div th:replace="~{demo/fragments :: header('home')}"></div>
+    <main>
+      <section class="hero">
+        <div class="hero-content">
+          <p class="eyebrow light">YOUR DAILY PAUSE, POURED FRESH</p>
+          <h1>Good coffee.<br /><em>Better days.</em></h1>
+          <p>
+            For the early starts, the unhurried afternoons,<br
+              class="desktop-only"
+            />
+            and every little moment in between.
+          </p>
+          <a class="button caramel" href="/menu"
+            >Find your favourite <span>↗</span></a
+          ><span class="hero-footnote"
+            >ESPRESSO CLASSICS &amp; ICED FAVOURITES</span
+          >
+        </div>
+      </section>
+      <section class="intro container">
+        <div>
+          <p class="eyebrow">MORE THAN A CUP</p>
+          <h2>A small ritual.<br />A brighter kind of day.</h2>
+        </div>
+        <p>
+          Sometimes, all it takes is a good cup of coffee. Explore familiar
+          classics and refreshing favourites, choose your cup, and make a little
+          time for yourself.
+        </p>
+      </section>
+      <section class="featured container">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">MADE FOR YOUR EVERYDAY</p>
+            <h2>A cup for every mood.</h2>
+          </div>
+          <a href="/menu" class="text-link">Explore the full menu ↗</a>
+        </div>
+        <div class="product-grid featured-grid">
+          <div th:each="product : ${featured}">
+            <article
+              th:replace="~{demo/fragments :: card(${product})}"
+            ></article>
+          </div>
+        </div>
+      </section>
+      <section class="ritual-band">
+        <div>
+          <p class="eyebrow">FROM FIRST CLICK TO LAST SIP</p>
+          <h2>Your coffee, your way.</h2>
+          <p>Discover your next favourite in three simple steps.</p>
+        </div>
+        <div class="ritual-step">
+          <span>01</span>
+          <h3>Pick your coffee</h3>
+          <p>Classic espresso or something on ice?</p>
+        </div>
+        <div class="ritual-step">
+          <span>02</span>
+          <h3>Make it a moment</h3>
+          <p>Add your favourites to your own cart.</p>
+        </div>
+        <div class="ritual-step">
+          <span>03</span>
+          <h3>Try the checkout</h3>
+          <p>Explore a simulated order, with no payment.</p>
+        </div>
+      </section>
+    </main>
+    <footer th:replace="~{demo/fragments :: footer}"></footer>
+  </body>
+</html>

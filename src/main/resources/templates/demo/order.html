@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{demo/fragments :: head('Demo order confirmation')}" />
+  <body>
+    <div th:replace="~{demo/fragments :: header('cart')}"></div>
+    <main class="container page-content">
+      <section class="confirmation">
+        <div class="confirmation-icon">✓</div>
+        <p class="eyebrow">DEMO CHECKOUT COMPLETE</p>
+        <h1>A little coffee.<br />A successful test.</h1>
+        <p>
+          Your sample order has been saved locally.<br />No payment was
+          collected and no order was sent to a café.
+        </p>
+        <span class="status-badge">SIMULATED · NOT PAID</span>
+      </section>
+      <section class="receipt">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">ORDER REFERENCE</p>
+            <h2 th:text="${order.id}"></h2>
+          </div>
+          <span th:text="${order.formattedDate()}"></span>
+        </div>
+        <div class="receipt-lines">
+          <div class="summary-row" th:each="line : ${order.lines}">
+            <span
+              ><strong th:text="${line.name}"></strong>
+              <small th:text="'× ' + ${line.quantity}"></small></span
+            ><strong th:text="${line.formattedTotal()}"></strong>
+          </div>
+          <div class="summary-row">
+            <span>Delivery (sample)</span
+            ><strong th:text="${order.formattedShipping()}"></strong>
+          </div>
+          <div class="summary-total">
+            <span>Total (simulated)</span
+            ><strong th:text="${order.formattedTotal()}"></strong>
+          </div>
+        </div>
+        <div class="receipt-address">
+          <p class="eyebrow">SAMPLE DELIVERY DETAILS</p>
+          <strong th:text="${order.recipient}"></strong>
+          <p th:text="${order.address}"></p>
+        </div>
+        <div class="receipt-actions">
+          <a href="/menu" class="button dark">Back to the menu ↗</a
+          ><a href="/profile" class="text-link">View order history</a>
+        </div>
+      </section>
+    </main>
+    <footer th:replace="~{demo/fragments :: footer}"></footer>
+  </body>
+</html>

@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 
 
+@org.springframework.context.annotation.Profile("!demo & !test")
 @Service
 public class UserServiceImpl implements UserService {
 

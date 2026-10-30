@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 // AUTO GENERATED DO NOT EDIT (EDIT AT YOUR OWN RISK)
 
+@org.springframework.context.annotation.Profile("!demo & !test")
 @Service
 @Transactional(readOnly = true)
 public class UserDetailServicesImpl implements UserDetailsService{

@@ -55,6 +55,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 
 @EnableJdbcHttpSession
+@org.springframework.context.annotation.Profile("!demo & !test")
 @RestController
 public class WiraController {
     private UserService service;
@@ -80,7 +81,8 @@ public class WiraController {
 //            DISINI ADALAH SEBUAH KONTROL UNTUK PAGE - HERE CONTROL FOR YOUR HEADACHE
 //===============================================================================================
     //===================================================== 
-    @RestController
+    @org.springframework.context.annotation.Profile("!demo & !test")
+@RestController
     @RequestMapping("/static")    
     class StaticControl{
         @RequestMapping("/about.html")
@@ -131,7 +133,8 @@ public class WiraController {
     //=====================================================
 
     //THIS AUTH THING GIVE ME A HEADACHE - KONTROL UNTUK AUTENTIKASI
-    @RestController
+    @org.springframework.context.annotation.Profile("!demo & !test")
+@RestController
     @RequestMapping("/auth")
     class Authentication{
         @GetMapping("/login")
@@ -260,7 +263,8 @@ public class WiraController {
     //THANK YOU VERY MUCH AUTH YOU DONE GAVE ME A SUFFER - AKHIR DARI KONTROL AUTENTIKASI
     
     //HERE LAYS ALL THE ERROR THING - SEKUMPULAN KONTROL BODOH DISINI
-    @RestController
+    @org.springframework.context.annotation.Profile("!demo & !test")
+@RestController
     @RestControllerAdvice
     @RequestMapping("/error")
     class ErrorControl implements ErrorController{
@@ -303,7 +307,8 @@ public class WiraController {
     //DONT UNDERESTIMATED MY POWER - TERIMA KASIH TELAH MEMBERIKAN SAYA PENGARAHAN
 
     //HERE WHAT THE USER CAN DO - KONTROL UNTUK PENGGUNA/USER DISINI  
-    @RestController
+    @org.springframework.context.annotation.Profile("!demo & !test")
+@RestController
     @RequestMapping("/user")
     class UserControl{
         @GetMapping("/jemBelanda")

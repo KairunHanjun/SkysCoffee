@@ -2,11 +2,10 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.3.0'
 	id 'io.spring.dependency-management' version '1.1.5'
-	id 'org.graalvm.buildtools.native' version '0.10.2'
 }
 
 group = 'org.kelompokwira.wirakopi'
-version = '0.0.1-SNAPSHOT'
+version = '1.0.0'
 
 java {
 	sourceCompatibility = '21'
@@ -41,14 +40,15 @@ dependencies {
 	implementation 'org.springframework.session:spring-session-core'
 
 	//test implementation
-	testImplementation 'org.springframework.security:spring-security-test:6.3.1'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test:3.3.1'
-	testImplementation 'org.mockito:mockito-core:5.12.0'
+	testImplementation 'org.springframework.security:spring-security-test'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
 	//Config
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+	runtimeOnly 'com.h2database:h2'
+	implementation 'com.google.code.gson:gson'
 	annotationProcessor 'org.projectlombok:lombok'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }

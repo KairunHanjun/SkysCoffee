@@ -25,7 +25,6 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Component
 @EqualsAndHashCode(of = "Id")
 @Table(name = "User_Stuff")
 public class UserStuff implements Serializable{
@@ -36,7 +35,8 @@ public class UserStuff implements Serializable{
     @JoinColumn(name = "user", referencedColumnName = "username")
     private User user;
     @Convert(converter = ConvertGson.class)
-    @Column(columnDefinition = "JSON")
+    @jakarta.persistence.Lob
+    @Column(name = "json_content")
     @JsonBackReference
     private JsonStuff jsonContent;
 }

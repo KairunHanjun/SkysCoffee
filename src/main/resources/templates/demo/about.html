@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{demo/fragments :: head('Our story')}" />
+  <body>
+    <div th:replace="~{demo/fragments :: header('about')}"></div>
+    <main class="container page-content">
+      <section class="about-grid">
+        <div>
+          <p class="eyebrow">THE IDEA BEHIND SKY’S COFFEE</p>
+          <h1>A simple cup.<br />A thoughtful experience.</h1>
+          <p class="large-copy">
+            A coffee shop concept brought to life as a complete web application
+            — from finding a favourite to reviewing an order.
+          </p>
+          <p>
+            This local portfolio demo connects a product catalogue, customer
+            accounts, a personal cart, and a simulated checkout. The coffee
+            imagery comes from the original SkysCoffee project.
+          </p>
+          <a href="/menu" class="button dark">Explore the experience ↗</a>
+        </div>
+        <img
+          src="/img/coffee_bean.png"
+          alt="Coffee beans arranged in the shape of a cup"
+        />
+      </section>
+      <section class="about-demo">
+        <p class="eyebrow">A NOTE ABOUT THIS EXPERIENCE</p>
+        <h2>Built to demonstrate. Designed to explore.</h2>
+        <div class="about-columns">
+          <div>
+            <h3>Sample data</h3>
+            <p>
+              Customer accounts and order details are fictional, stored in a
+              local H2 database.
+            </p>
+          </div>
+          <div>
+            <h3>No real transactions</h3>
+            <p>
+              Checkout is a simulation. No payment gateway, email, or delivery
+              service is contacted.
+            </p>
+          </div>
+          <div>
+            <h3>A fresh start</h3>
+            <p>
+              Every application restart restores the original demo accounts and
+              cart.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer th:replace="~{demo/fragments :: footer}"></footer>
+  </body>
+</html>

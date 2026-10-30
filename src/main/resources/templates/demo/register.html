@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{demo/fragments :: head('Create demo account')}" />
+  <body>
+    <div th:replace="~{demo/fragments :: header('account')}"></div>
+    <main class="container narrow page-content">
+      <div class="page-heading centered">
+        <p class="eyebrow">JOIN THE COFFEE MOMENT</p>
+        <h1>Your own little coffee corner.</h1>
+        <p>Create a local sample account. No email or OTP will be sent.</p>
+      </div>
+      <section class="form-panel">
+        <p class="notice error" th:if="${error}" th:text="${error}"></p>
+        <form th:action="@{/auth/register}" method="post">
+          <div class="form-grid">
+            <label
+              >Display name<input
+                name="name"
+                required
+                maxlength="100"
+                placeholder="Sample Customer" /></label
+            ><label
+              >Username<input
+                name="username"
+                required
+                pattern="[a-zA-Z0-9._-]{3,30}"
+                maxlength="30"
+                placeholder="sample.customer"
+                autocomplete="username" /></label
+            ><label
+              >Sample email<input
+                name="email"
+                type="email"
+                required
+                maxlength="150"
+                placeholder="customer@example.test" /></label
+            ><label
+              >Sample phone<input
+                name="phone"
+                required
+                pattern="[0-9+() -]{6,20}"
+                maxlength="20"
+                placeholder="0000000000" /></label
+            ><label
+              >Password<input
+                name="password"
+                type="password"
+                required
+                minlength="8"
+                maxlength="72"
+                autocomplete="new-password" /></label
+            ><label
+              >Confirm password<input
+                name="confirmation"
+                type="password"
+                required
+                minlength="8"
+                maxlength="72"
+                autocomplete="new-password"
+            /></label>
+          </div>
+          <p class="form-note">
+            This account exists only in the local demo database. Use invented
+            details and a password you do not use elsewhere.
+          </p>
+          <button type="submit" class="button dark full">
+            Create demo account ↗
+          </button>
+        </form>
+        <p class="centered form-note">
+          Already have an account? <a href="/auth/login">Sign in</a>
+        </p>
+      </section>
+    </main>
+    <footer th:replace="~{demo/fragments :: footer}"></footer>
+  </body>
+</html>

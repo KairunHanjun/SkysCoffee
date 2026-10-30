@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{demo/fragments :: head(${product.name})}" />
+  <body>
+    <div th:replace="~{demo/fragments :: header('menu')}"></div>
+    <main class="container page-content">
+      <a href="/menu" class="back-link">← Back to the menu</a>
+      <section class="product-detail">
+        <div class="detail-image">
+          <img th:src="${product.image}" th:alt="${product.name}" /><span
+            class="detail-stamp"
+            >A LITTLE MOMENT<br />JUST FOR YOU</span
+          >
+        </div>
+        <div class="detail-copy">
+          <p class="eyebrow" th:text="${product.category}"></p>
+          <h1 th:text="${product.name}"></h1>
+          <p class="detail-subtitle" th:text="${product.subtitle}"></p>
+          <strong
+            class="detail-price"
+            th:text="${product.formattedPrice()}"
+          ></strong>
+          <p class="detail-description" th:text="${product.description}"></p>
+          <div class="product-facts">
+            <span>Made to order</span><span>Sample menu</span
+            ><span
+              th:text="${product.category == 'Iced favourites' ? 'Served iced' : 'Served hot'}"
+            ></span>
+          </div>
+          <form
+            th:if="${signedIn}"
+            th:action="@{/cart/items}"
+            method="post"
+            class="add-form"
+          >
+            <input
+              type="hidden"
+              name="product"
+              th:value="${product.id}"
+            /><label
+              >Quantity<input
+                name="quantity"
+                type="number"
+                value="1"
+                min="1"
+                max="20"
+                step="1"
+                required /></label
+            ><button type="submit" class="button dark">
+              Add to cart <span>↗</span>
+            </button>
+          </form>
+          <a th:if="${!signedIn}" href="/auth/login" class="button dark"
+            >Sign in to order ↗</a
+          >
+          <p class="detail-note">
+            Portfolio demo · No real purchase or delivery.<br />Milk-based
+            drinks contain dairy. This is a sample catalogue.
+          </p>
+        </div>
+      </section>
+    </main>
+    <footer th:replace="~{demo/fragments :: footer}"></footer>
+  </body>
+</html>

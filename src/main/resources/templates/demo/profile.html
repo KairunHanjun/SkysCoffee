@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{demo/fragments :: head('My account')}" />
+  <body>
+    <div th:replace="~{demo/fragments :: header('account')}"></div>
+    <main class="container page-content">
+      <div th:replace="~{demo/fragments :: message}"></div>
+      <div class="page-heading heading-row">
+        <div>
+          <p class="eyebrow">YOUR COFFEE CORNER</p>
+          <h1 th:text="'Hello, ' + ${customer.name} + '.'"></h1>
+          <p>Manage your sample profile and revisit your demo orders.</p>
+        </div>
+        <form th:action="@{/logout}" method="post">
+          <button class="button outline" type="submit">Sign out ↗</button>
+        </form>
+      </div>
+      <div class="profile-layout">
+        <section class="form-panel">
+          <div
+            class="profile-avatar"
+            th:text="${#strings.substring(customer.name,0,1)}"
+          ></div>
+          <h2>Profile details</h2>
+          <form th:action="@{/profile}" method="post">
+            <label
+              >Username<input th:value="${customer.username}" readonly /></label
+            ><label
+              >Sample email<input
+                th:value="${customer.email}"
+                readonly /></label
+            ><label
+              >Display name<input
+                name="name"
+                th:value="${customer.name}"
+                required
+                maxlength="100" /></label
+            ><label
+              >Sample phone<input
+                name="phone"
+                th:value="${customer.no_telp}"
+                required
+                maxlength="20"
+                pattern="[0-9+() -]{6,20}" /></label
+            ><button type="submit" class="button dark full">
+              Save profile ↗
+            </button>
+          </form>
+          <p class="form-note">
+            Sample account · Changes reset when the demo restarts.
+          </p>
+        </section>
+        <section class="history-panel">
+          <div class="panel-heading">
+            <h2>Your demo orders</h2>
+            <span
+              th:text="${orders.size() == 1 ? '1 order' : orders.size() + ' orders'}"
+            ></span>
+          </div>
+          <div class="empty-history" th:if="${orders.isEmpty()}">
+            <h3>Your first coffee moment is waiting.</h3>
+            <p>Complete a simulated checkout to see your order here.</p>
+            <a href="/menu" class="text-link">Find your favourite ↗</a>
+          </div>
+          <article class="history-item" th:each="order : ${orders}">
+            <div>
+              <a th:href="@{/orders/{id}(id=${order.id})}"
+                ><h3 th:text="${order.id}"></h3
+              ></a>
+              <p th:text="${order.formattedDate()}"></p>
+              <span class="status-badge">SIMULATED · NOT PAID</span>
+            </div>
+            <div>
+              <strong th:text="${order.formattedTotal()}"></strong
+              ><a th:href="@{/orders/{id}(id=${order.id})}" class="text-link"
+                >View details ↗</a
+              >
+            </div>
+          </article>
+        </section>
+      </div>
+    </main>
+    <footer th:replace="~{demo/fragments :: footer}"></footer>
+  </body>
+</html>

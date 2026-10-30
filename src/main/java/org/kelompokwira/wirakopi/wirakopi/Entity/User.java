@@ -26,6 +26,8 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
+@lombok.EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@lombok.ToString(onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "Users", uniqueConstraints = @UniqueConstraint(columnNames = {"username"}))
 public class User implements UserDetails{
@@ -39,6 +41,8 @@ public class User implements UserDetails{
     private Long OTP = (long) 0;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @lombok.EqualsAndHashCode.Include
+    @lombok.ToString.Include
     private Long id;
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, orphanRemoval = false)
     private List<UserAuthorities> listAuthorities = new ArrayList<>();

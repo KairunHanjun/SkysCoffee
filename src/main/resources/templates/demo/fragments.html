@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head th:fragment="head(title)">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title th:text="${title} + ' · Sky’s Coffee'">Sky’s Coffee</title>
+    <meta
+      name="description"
+      content="Sky’s Coffee local portfolio demonstration: discover coffee, manage a cart, and simulate an order."
+    />
+    <link rel="stylesheet" th:href="@{/css/demo.css}" />
+    <script defer th:src="@{/js/demo.js}"></script>
+  </head>
+  <body>
+    <div th:fragment="header(active)">
+      <div class="demo-strip">
+        <span>PORTFOLIO DEMO</span> Sample data · No real payments
+      </div>
+      <header class="site-header">
+        <a class="brand" href="/"
+          >Sky’s Coffee<span>A LITTLE COFFEE. A LITTLE CALM.</span></a
+        >
+        <nav aria-label="Main navigation">
+          <a href="/" th:classappend="${active == 'home'} ? 'active'">Home</a
+          ><a href="/menu" th:classappend="${active == 'menu'} ? 'active'"
+            >Our menu</a
+          ><a href="/about" th:classappend="${active == 'about'} ? 'active'"
+            >Our story</a
+          >
+        </nav>
+        <div class="header-actions">
+          <a
+            class="cart-link"
+            href="/cart"
+            th:aria-label="${'Cart, ' + cartCount + (cartCount == 1 ? ' item' : ' items')}"
+            >Cart <span class="cart-count" th:text="${cartCount}">0</span></a
+          ><a
+            th:if="${signedIn != true}"
+            href="/auth/login"
+            class="button small dark"
+            >Sign in ↗</a
+          ><a th:if="${signedIn == true}" href="/profile" class="account-link"
+            >My account ↗</a
+          >
+        </div>
+      </header>
+    </div>
+    <footer th:fragment="footer" class="site-footer">
+      <div>
+        <a class="brand" href="/"
+          >Sky’s Coffee<span>A LITTLE COFFEE. A LITTLE CALM.</span></a
+        >
+        <p>
+          A coffee shop web application.<br />A small ritual, thoughtfully put
+          together.
+        </p>
+      </div>
+      <nav aria-label="Footer navigation">
+        <a href="/menu">Explore the menu</a><a href="/about">About this demo</a
+        ><a href="/profile">My account</a>
+      </nav>
+      <div class="footer-note">
+        <span>LOCAL PORTFOLIO DEMO</span>
+        <p>
+          All accounts and orders are samples.<br />Data resets when the
+          application restarts.
+        </p>
+      </div>
+    </footer>
+    <div
+      th:fragment="message"
+      th:if="${message != null}"
+      role="status"
+      class="notice success"
+      th:text="${message}"
+    ></div>
+    <article th:fragment="card(product)" class="product-card">
+      <a class="product-image" th:href="@{/product(product=${product.id})}"
+        ><img
+          th:src="${product.image}"
+          th:alt="${product.name}"
+          loading="lazy" /><span
+          class="category-tag"
+          th:text="${product.category}"
+        ></span
+      ></a>
+      <div class="product-info">
+        <a th:href="@{/product(product=${product.id})}"
+          ><h3 th:text="${product.name}"></h3
+        ></a>
+        <p th:text="${product.subtitle}"></p>
+        <div class="product-card-bottom">
+          <strong th:text="${product.formattedPrice()}"></strong
+          ><a
+            th:href="@{/product(product=${product.id})}"
+            class="round-link"
+            th:aria-label="'View ' + ${product.name}"
+            >↗</a
+          >
+        </div>
+      </div>
+    </article>
+  </body>
+</html>

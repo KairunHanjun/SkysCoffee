@@ -1,6 +1,6 @@
 package org.kelompokwira.wirakopi.wirakopi.JsonObject;
 
-import com.nimbusds.jose.shaded.gson.Gson;
+import com.google.gson.Gson;
 
 import jakarta.persistence.AttributeConverter;
 

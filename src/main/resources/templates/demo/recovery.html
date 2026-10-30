@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{demo/fragments :: head('Demo account help')}" />
+  <body>
+    <div th:replace="~{demo/fragments :: header('account')}"></div>
+    <main class="container narrow page-content">
+      <section class="form-panel centered">
+        <p class="eyebrow">A FRESH START</p>
+        <h1>Need a hand signing in?</h1>
+        <p>
+          The local demo does not send password recovery emails. Use the sample
+          account below, or restart the application to restore it.
+        </p>
+        <div class="demo-credentials">
+          <p><code>coffee.demo</code><br /><code>DemoCoffee123!</code></p>
+        </div>
+        <a class="button dark" href="/auth/login">Back to sign in ↗</a>
+      </section>
+    </main>
+    <footer th:replace="~{demo/fragments :: footer}"></footer>
+  </body>
+</html>
