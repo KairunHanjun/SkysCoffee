@@ -98,3 +98,7 @@ Proyek awal dikembangkan mandiri oleh **Guntur Ahmad Lion Putranto**. Penyempurn
 ## Lisensi
 
 Proyek menggunakan **Apache License 2.0** yang sudah tersedia pada [LICENSE](LICENSE). Lisensi asli dipertahankan. Dependensi, gambar, dan font pihak ketiga tetap mengikuti lisensinya masing-masing.
+
+## Hosting demo VPS
+
+Branch `demo` menggunakan data dummy. Panduan runtime permanen, build, dan reset: [deploy/README.md](deploy/README.md).
