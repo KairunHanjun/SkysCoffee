@@ -16,7 +16,7 @@ A Java web application exploring product browsing, customer accounts, shopping c
 
 ## Stack
 
-Java 21, Spring Boot 3.3.0, Thymeleaf, Spring Security, Spring Data JPA, MariaDB in the original implementation, Gradle Wrapper, and JUnit/MockMvc. The separate portfolio demo uses in-memory H2 and fictional data.
+Java 21, Spring Boot 3.5.16, Thymeleaf, Spring Security, Spring Data JPA, MariaDB in the original implementation, Gradle Wrapper, and JUnit/MockMvc. The separate portfolio demo uses in-memory H2 and fictional data.
 
 ## Run the repository source
 

@@ -18,7 +18,7 @@ Aplikasi web berbasis Java untuk mengeksplorasi katalog, akun pelanggan, keranja
 
 | Bagian | Teknologi |
 | --- | --- |
-| Backend | Java 21, Spring Boot 3.3.0 |
+| Backend | Java 21, Spring Boot 3.5.16 |
 | Antarmuka | Thymeleaf, HTML, CSS, JavaScript |
 | Akun & data | Spring Security, Spring Data JPA, MariaDB pada implementasi awal |
 | Demo lokal | H2 di memori, katalog dan akun fiktif |
